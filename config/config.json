@@ -3,10 +3,20 @@
   [
     {
       "pass" : "x",
-      "url" : "stratum+ssl://us2.ethermine.org:5555",
-      "user" : "0x4208E04E6cAC8f496596fbfAFdF140382275C495",
+      "url" : "stratum+tcp://asia.ezil.me:5555",
+      "user" : "0xE7e7eAeA601CfBcBDac6fB3D14D367181F447f06.zil1ryau8mnx43dcsn504cqlypz5y2dnryq8707fcz",
       "worker" : "Rig"
     }
   ],
-  "api-bind-http" : "0.0.0.0:4067"
+  "api-bind-http" : "0.0.0.0:4067",
+  "no-nvml":false,
+  "json-response":true,
+  "pci-indexing":true,
+  "retries":3,
+  "retry-pause":10,
+  "timeout":500,
+  "no-watchdog":true,
+  "algo":"ethash",
+  "exit-on-cuda-error":true,
+  "exit-on-connection-lost":true
 }

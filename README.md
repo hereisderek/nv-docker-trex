@@ -11,6 +11,8 @@ This docker was specficially made for running on an Unraid system that uses Linu
 
 That said, this docker does not require Unraid, it can be used on any system that uses [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
 
+This fork is based off the original author [PTRFRLL](https://github.com/PTRFRLL/nv-docker-trex), modified by [me](https://github.com/hereisderek/nv-docker-trex)
+
 ## Miner
 
 Currently uses [T-Rex Miner](https://github.com/trexminer/T-Rex) for mining.
@@ -62,11 +64,25 @@ If you want to use the config file, map the `/config` path as well
 **Example**:
 
 ```
-docker run -d --name='trex-miner' -e WALLET=0xYOUR_ETH_WALLET_ADDRESS -e SERVER=stratum+ssl://us2.ethermine.org:5555 -e WORKER=Rig -e ALGO=ethash  -p '4067:4067/tcp' --runtime=nvidia ptrfrll/nv-docker-trex
+docker run -d --name='trex-miner' -e WALLET=0xYOUR_ETH_WALLET_ADDRESS -e SERVER=stratum+ssl://us2.ethermine.org:5555 -e WORKER=Rig -e ALGO=ethash  -p '4067:4067/tcp' --runtime=nvidia hereisderek/nv-docker-trex:nightly
 ```
 
 **With Config File**:
 
 ```
-docker run -d --name='trex-miner' -e WALLET=0xYOUR_ETH_WALLET_ADDRESS -e SERVER=stratum+ssl://us2.ethermine.org:5555 -e WORKER=Rig -e ALGO=ethash  -p '4067:4067/tcp' -v '/path/to/config/':'/config':rw --runtime=nvidia ptrfrll/nv-docker-trex
+docker run -d --name='trex-miner' -e WALLET=0xYOUR_ETH_WALLET_ADDRESS -e SERVER=stratum+ssl://us2.ethermine.org:5555 -e WORKER=Rig -e ALGO=ethash  -p '4067:4067/tcp' -v '/path/to/config/':'/config':rw  --runtime=nvidia hereisderek/nv-docker-trex:nightly
+```
+
+
+
+**Build**:
+
+```
+docker build -t nv-docker-trex .  \
+    && docker tag nv-docker-trex hereisderek/nv-docker-trex:nightly \
+    && docker push hereisderek/nv-docker-trex:nightly
+
+docker build -t nv-docker-trex:cuda10-nightly -f ./Dockerfile.cuda10 .  \
+    && docker tag nv-docker-trex:cuda10-nightly hereisderek/nv-docker-trex:cuda10-nightly \
+    && docker push hereisderek/nv-docker-trex:cuda10-nightly
 ```

@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  trex-miner:
+    container_name: trex-miner
+    image: hereisderek/nv-docker-trex:nightly
+    runtime: nvidia
+    ports:
+      - 4067:4067/tcp
+    restart: unless-stopped
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      - API_PASSWORD=Password1
+      - WALLET=0xE7e7eAeA601CfBcBDac6fB3D14D367181F447f06.zil1ryau8mnx43dcsn504cqlypz5y2dnryq8707fcz
+      - SERVER=stratum+tcp://asia.ezil.me:5555
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidia1:/dev/nvidia1
+      - /dev/nvidia2:/dev/nvidia2
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - capabilities: [gpu]
+    volumes:
+      - ./config:/config
